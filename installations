@@ -1,0 +1,23 @@
+!pip install google-generativeai langchain python-dotenv
+!pip install google-generativeai --upgrade
+!pip install langchain
+!pip install streamlit PyPDF2 langchain_google_genai google.generativeai faiss-cpu python-dotenv
+!pip install -U langchain langchain-community
+!pip install tiktoken
+from google.cloud import aiplatform
+from langchain_google_genai import ChatGoogleGenerativeAI
+p install google-cloud-aiplatform
+
+
+from google.colab import files
+files.upload()  # Select your .env file here
+pip install google-generativeai
+import google.generativeai as genai
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+google_api_key = os.getenv("GOOGLE_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
+genai.configure(api_key=google_api_key)
