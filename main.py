@@ -69,14 +69,28 @@ def user_input(question, chain, chat_history):
     chat_history.append((question, response["answer"]))
 
 # Main Execution
-print("📂 Upload your PDF files")
-uploaded = files.upload()
 
+pdf_docs = []  # Empty list to store all uploaded PDFs
+while True:
+    print("📂 Upload your PDF files (or type 'done' when finished)")
+    uploaded = files.upload()
+    pdf_docs.extend([pdf for pdf in uploaded.keys()])  # Append new PDFs
+    next_step = input("Type 'upload' to add more files or 'finish' to proceed: ").strip().lower()
+    if next_step == 'finish':
+        break
+raw_text = get_pdf_text(pdf_docs)
+text_chunks = get_text_chunks(raw_text)
+get_vector_store(text_chunks)
+print("✅ All PDFs processed successfully!")
+
+
+'''print("📂 Upload your PDF files")
+uploaded = files.upload()
 pdf_docs = [pdf for pdf in uploaded.keys()]
 raw_text = get_pdf_text(pdf_docs)
 text_chunks = get_text_chunks(raw_text)
 get_vector_store(text_chunks)
-print("✅ PDF processed successfully!")
+print("✅ PDF processed successfully!")'''
 
 # Initialize Chain
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
